@@ -1,4 +1,4 @@
-package com.linkpocket
+package com.linkpocket.ext
 
 import android.content.Context
 import android.view.LayoutInflater.from

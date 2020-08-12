@@ -1,7 +1,10 @@
-package com.linkpocket
+package com.linkpocket.ui
 
 import android.view.View
 import com.bumptech.glide.Glide
+import com.linkpocket.R
+import com.linkpocket.ext.ItemViewBuilder
+import com.linkpocket.model.Preview
 import kotlinx.android.synthetic.main.item_card_link.view.*
 
 class LinkKeeperAdapter : ItemViewBuilder<Preview>() {

@@ -1,4 +1,4 @@
-package com.linkpocket
+package com.linkpocket.model
 
 data class Preview(
     val name: String,
