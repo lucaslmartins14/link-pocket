@@ -3,24 +3,49 @@ package com.linkpocket.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.linkpocket.model.Preview
-import com.linkpocket.R
+import com.domain.GetListUseCase
+import com.domain.model.Preview
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 
-class MainViewModel : ViewModel() {
-
-    private val previewSet = arrayListOf(
-        Preview("Bar Do Chucrutes", "picapau", R.drawable.ic_launcher_background),
-        Preview("Rafinhas", "chaves", R.drawable.ic_launcher_background),
-        Preview("Samuquinha", "samurai", R.drawable.ic_launcher_background),
-        Preview("Fêzinho", "pensando no frango", R.drawable.ic_launcher_background),
-        Preview("Charleston", "10", R.drawable.ic_launcher_background)
-    )
+class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
 
     private val mainViewStateMutableLiveData = MutableLiveData<MainUiState>()
     val mainViewStateLiveData: LiveData<MainUiState> = mainViewStateMutableLiveData
 
     init {
-        mainViewStateMutableLiveData.postValue(MainUiState.Loading)
+        initList()
+    }
+
+    private fun initList() {
+        getListUseCase.executeJust()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<List<Preview>> {
+                override fun onComplete() {
+
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    // Inscrever para receber a lista
+
+                    // Iniciar Loading
+                    mainViewStateMutableLiveData.postValue(MainUiState.Loading)
+                }
+
+                override fun onNext(previewList: List<Preview>) {
+                    // Enviar a lista
+
+                    // Retorno da Lista
+                    mainViewStateMutableLiveData.postValue(MainUiState.Success(previewList))
+                }
+
+                override fun onError(e: Throwable) {
+                    // Tratar os erros
+
+                    mainViewStateMutableLiveData.postValue(MainUiState.Error)
+                }
+            })
     }
 
 }

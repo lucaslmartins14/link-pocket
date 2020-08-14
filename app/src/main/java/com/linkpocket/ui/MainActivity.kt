@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.linkpocket.model.Preview
+import com.domain.model.Preview
 import com.linkpocket.R
 import com.linkpocket.ext.setup
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
     private fun handlerState(state: MainUiState) {
         when (state) {
             is MainUiState.Loading -> showLoading()
-            is MainUiState.Success -> setupListPreview(state.list)
+            is MainUiState.Success -> {
+                hideLoading()
+                setupListPreview(state.list)
+            }
             is MainUiState.Error -> showError()
         }
     }
@@ -41,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoading() {
         loading.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        loading.visibility = View.GONE
     }
 
     private fun showError() {
