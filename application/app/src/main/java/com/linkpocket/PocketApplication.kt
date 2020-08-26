@@ -1,10 +1,10 @@
 package com.linkpocket
 
 import android.app.Application
+import com.data.di.RepositoryModule
 import com.domain.di.DomainModule
 import com.linkpocket.di.PresentationModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
 class PocketApplication : Application() {
@@ -13,9 +13,8 @@ class PocketApplication : Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger()
             androidContext(this@PocketApplication)
-            modules(PresentationModule.module, DomainModule.module)
+            modules(PresentationModule.module, DomainModule.module, RepositoryModule.module)
         }
     }
 }

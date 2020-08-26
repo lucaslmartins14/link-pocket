@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.domain.GetListUseCase
 import com.domain.model.Preview
 import io.reactivex.Observer
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
 
@@ -19,7 +21,8 @@ class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
     }
 
     private fun initList() {
-        getListUseCase.executeJust()
+        getListUseCase.getPreview()
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<Preview>> {
                 override fun onComplete() {
