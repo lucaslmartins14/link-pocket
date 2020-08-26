@@ -1,7 +1,7 @@
 [
   {
-    "name": "Bar do Chucrutes",
-    "description": "picapau",
+    "name": "Caiquera",
+    "description": "cabrito",
     "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
@@ -16,12 +16,17 @@
   },
   {
     "name": "Fêzinho",
-    "description": "pensando no frango",
+    "description": "el bigodon",
     "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
-    "name": "Charleston",
+    "name": "Charlin",
     "description": "10",
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
+  },
+  {
+    "name": "Matheus",
+    "description": "Querido",
     "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   }
 ]
