@@ -1,27 +1,32 @@
 [
   {
-    "name": "Bar do Chucrutes",
-    "description": "picapau",
-    "ïmage": "https://api.adorable.io/avatars/285/abott@adorable.png"
+    "name": "Caiquera",
+    "description": "cabrito",
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
     "name": "Rafinhas",
     "description": "chaves",
-    "ïmage": "https://api.adorable.io/avatars/285/abott@adorable.png"
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
     "name": "Samuquinha",
     "description": "samurai",
-    "ïmage": "https://api.adorable.io/avatars/285/abott@adorable.png"
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
     "name": "Fêzinho",
-    "description": "pensando no frango",
-    "ïmage": "https://api.adorable.io/avatars/285/abott@adorable.png"
+    "description": "el bigodon",
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   },
   {
-    "name": "Charleston",
+    "name": "Charlin",
     "description": "10",
-    "ïmage": "https://api.adorable.io/avatars/285/abott@adorable.png"
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
+  },
+  {
+    "name": "Matheus",
+    "description": "Querido",
+    "image": "https://api.adorable.io/avatars/285/abott@adorable.png"
   }
 ]
