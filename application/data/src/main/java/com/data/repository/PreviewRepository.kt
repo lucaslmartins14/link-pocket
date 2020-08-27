@@ -6,13 +6,13 @@ import com.domain.model.Preview
 import com.domain.repository.IPreviewRepository
 import io.reactivex.Observable
 
-class PreviewRepository : IPreviewRepository {
+class PreviewRepository(private val gitHubService: GitHubService) : IPreviewRepository {
 
-    private val gitHubService = GitHubService()
     private val mapper = PreviewMapper()
 
     override fun getPreview(): Observable<List<Preview>> {
-        return gitHubService.getPreview()
+        return gitHubService
+            .getPreview()
             .getList()
             .flatMapIterable { it }
             .map { value -> mapper.transform(value) }

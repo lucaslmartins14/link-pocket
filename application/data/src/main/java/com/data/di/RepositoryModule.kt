@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object RepositoryModule {
     val module = module {
-        factory<IPreviewRepository> { PreviewRepository() }
+        factory<IPreviewRepository> { PreviewRepository(get()) }
     }
 }

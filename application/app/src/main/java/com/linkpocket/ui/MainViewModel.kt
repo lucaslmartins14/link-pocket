@@ -44,7 +44,7 @@ class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
                 }
 
                 override fun onError(e: Throwable) {
-                    // Tratar os erros
+                    // Tratar os erros vindos de qualquer package
 
                     mainViewStateMutableLiveData.postValue(MainUiState.Error)
                 }

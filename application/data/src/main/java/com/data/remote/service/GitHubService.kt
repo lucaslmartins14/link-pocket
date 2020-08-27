@@ -1,10 +1,10 @@
 package com.data.remote.service
 
-import com.data.remote.RetrofitInit
+import com.data.remote.HTTPClient
+import com.data.remote.request.IGitHubService
 
-class GitHubService {
-
+class GitHubService(private val httpClient: HTTPClient) {
     fun getPreview() : IGitHubService {
-        return RetrofitInit().retrofit.create(IGitHubService::class.java)
+        return httpClient.getRetrofit(IGitHubService::class)
     }
 }
