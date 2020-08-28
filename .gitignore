@@ -86,3 +86,11 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+.DS_Store
+application/.DS_Store
+
+application/.idea/*
+application/.gradle/*
+
+.idea/*
+.gradle/*

@@ -1,4 +1,4 @@
-package com.data.remote
+package com.data.remote.network
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -14,5 +14,5 @@ class HTTPClient {
             .build()
     }
 
-    fun <T : Any> getRetrofit(clazz: KClass<T>): T = provideRetrofit().create(clazz.java)
+    fun <T : Any> create(clazz: KClass<T>): T = provideRetrofit().create(clazz.java)
 }
