@@ -1,6 +1,8 @@
 package com.linkpocket
 
 import android.content.Context
+import android.os.AsyncTask
+import com.linkpocket.dao.PreviewDao
 import com.linkpocket.entity.PreviewEntity
 
 class PreviewCache(context: Context) {
@@ -16,19 +18,41 @@ class PreviewCache(context: Context) {
     }
 
     fun delete(previews: PreviewEntity) {
-        accessPreview.delete(previews)
+        Thread {
+            accessPreview.delete(previews)
+        }.start()
     }
 
     fun update(previews: PreviewEntity) {
-        accessPreview.update(previews)
+        Thread {
+            accessPreview.update(previews)
+        }.start()
     }
 
-    fun getAll(): List<PreviewEntity> {
-        return accessPreview.getAll()
+    fun getAll(callback: (list: List<PreviewEntity>) -> Unit) {
+        GetAllAsync(accessPreview, callback).execute()
     }
 
-    interface Action {
-
-        fun onFinish()
+    fun getAllWithThread(callback: (list: List<PreviewEntity>) -> Unit){
+        Thread{
+            val list = accessPreview.getAll()
+            callback(list)
+        }.start()
     }
+}
+
+class GetAllAsync(
+    private val previewDao: PreviewDao,
+    private val callback: (list: List<PreviewEntity>) -> Unit
+) : AsyncTask<Void, Void, List<PreviewEntity>>() {
+
+    override fun doInBackground(vararg params: Void?): List<PreviewEntity> {
+        return previewDao.getAll()
+    }
+
+    override fun onPostExecute(result: List<PreviewEntity>) {
+        super.onPostExecute(result)
+        callback(result)
+    }
+
 }

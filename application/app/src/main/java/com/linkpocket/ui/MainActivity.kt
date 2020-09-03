@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.mainViewStateLiveData.observe(this, Observer {
             handlerState(it)
         })
+
     }
 
     private fun handlerState(state: MainUiState) {
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 val previewEntity = state.list.map { transform(it) }
 
                 previewCache.addAll(*previewEntity.toTypedArray())
+                getList()
             }
             is MainUiState.Error -> showError()
         }
@@ -64,5 +66,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun showError() {
         state_error.visibility = View.VISIBLE
+    }
+
+    private fun getList(){
+        previewCache.getAll { list ->
+            list.size
+        }
+        previewCache.getAllWithThread { list->
+            runOnUiThread {
+                list.size
+            }
+        }
     }
 }
