@@ -4,7 +4,6 @@ import com.data.mapper.PreviewMapper
 import com.data.remote.cloud.GitHubCloud
 import com.domain.model.Preview
 import com.domain.repository.IPreviewRepository
-import io.reactivex.Completable
 import io.reactivex.Observable
 
 class PreviewRepository(private val gitHubCloud: GitHubCloud) : IPreviewRepository {
@@ -18,9 +17,5 @@ class PreviewRepository(private val gitHubCloud: GitHubCloud) : IPreviewReposito
             .map { value -> mapper.transform(value) }
             .toList()
             .toObservable()
-    }
-
-    override fun savePreview(): Completable {
-        return gitHubCloud.savePreview()
     }
 }

@@ -19,6 +19,6 @@ class LinkKeeperAdapter : ItemViewBuilder<Preview>() {
         Glide.with(this)
             .load(item.image)
             .placeholder(R.drawable.ic_launcher_background)
-            .into(photo);
+            .into(photo)
     }
 }
