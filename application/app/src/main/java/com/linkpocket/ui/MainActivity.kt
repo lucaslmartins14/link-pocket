@@ -6,9 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.domain.model.Preview
-import com.linkpocket.PreviewCache
+import com.data.local.db.PreviewCache
 import com.linkpocket.R
-import com.linkpocket.entity.PreviewEntity
 import com.linkpocket.ext.setup
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
@@ -36,17 +35,10 @@ class MainActivity : AppCompatActivity() {
                 hideLoading()
                 setupListPreview(state.list)
 
-                val previewEntity = state.list.map { transform(it) }
-
-                previewCache.addAll(*previewEntity.toTypedArray())
                 getList()
             }
             is MainUiState.Error -> showError()
         }
-    }
-
-    private fun transform(preview: Preview) : PreviewEntity {
-        return PreviewEntity(name = preview.name, description = preview.description, image = preview.image)
     }
 
     private fun setupListPreview(list: List<Preview>) {
@@ -68,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         state_error.visibility = View.VISIBLE
     }
 
-    private fun getList(){
+    private fun getList() {
         previewCache.getAll { list ->
             list.size
         }

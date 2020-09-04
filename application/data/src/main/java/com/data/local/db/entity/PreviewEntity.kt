@@ -1,4 +1,4 @@
-package com.linkpocket.entity
+package com.data.local.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,9 +1,10 @@
-package com.linkpocket
+package com.data.local.db
 
 import android.content.Context
 import android.os.AsyncTask
-import com.linkpocket.dao.PreviewDao
-import com.linkpocket.entity.PreviewEntity
+import com.data.local.db.dao.PreviewDao
+import com.data.local.db.entity.PreviewEntity
+import io.reactivex.Observable
 
 class PreviewCache(context: Context) {
 
@@ -33,8 +34,12 @@ class PreviewCache(context: Context) {
         GetAllAsync(accessPreview, callback).execute()
     }
 
+    fun getAllObservableSync(): Observable<List<PreviewEntity>> {
+        return Observable.just(accessPreview.getAll())
+    }
+
     fun getAllWithThread(callback: (list: List<PreviewEntity>) -> Unit){
-        Thread{
+        Thread {
             val list = accessPreview.getAll()
             callback(list)
         }.start()

@@ -1,6 +1,7 @@
 package com.linkpocket
 
 import android.app.Application
+import com.data.di.DatabaseModule
 import com.data.di.NetworkModule
 import com.data.di.RepositoryModule
 import com.domain.di.DomainModule
@@ -19,6 +20,7 @@ class PocketApplication : Application() {
                 PresentationModule.module,
                 DomainModule.module,
                 RepositoryModule.module,
+                DatabaseModule.module,
                 NetworkModule.module
             )
         }

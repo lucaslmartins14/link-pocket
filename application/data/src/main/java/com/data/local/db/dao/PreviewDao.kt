@@ -1,11 +1,11 @@
-package com.linkpocket.dao
+package com.data.local.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.linkpocket.entity.PreviewEntity
+import com.data.local.db.entity.PreviewEntity
 
 @Dao
 interface PreviewDao {
