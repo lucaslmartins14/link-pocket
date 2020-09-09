@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.domain.model.Preview
-import com.data.local.db.PreviewCache
+import com.data.local.db.PreviewDao
 import com.linkpocket.R
 import com.linkpocket.ext.setup
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,8 +15,6 @@ import org.koin.android.ext.android.inject
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by inject()
-
-    private val previewCache by lazy { PreviewCache(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,6 @@ class MainActivity : AppCompatActivity() {
                 hideLoading()
                 setupListPreview(state.list)
 
-                getList()
             }
             is MainUiState.Error -> showError()
         }
@@ -58,16 +55,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun showError() {
         state_error.visibility = View.VISIBLE
-    }
-
-    private fun getList() {
-        previewCache.getAll { list ->
-            list.size
-        }
-        previewCache.getAllWithThread { list->
-            runOnUiThread {
-                list.size
-            }
-        }
     }
 }

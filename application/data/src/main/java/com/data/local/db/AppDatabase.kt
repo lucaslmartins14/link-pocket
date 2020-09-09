@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.data.local.db.dao.PreviewDao
+import com.data.local.db.dao.IPreviewDao
 import com.data.local.db.entity.PreviewEntity
 
 @Database(entities = [PreviewEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun previewDao(): PreviewDao
+    abstract fun previewDao(): IPreviewDao
 }
 
 object DatabaseBuilder {
