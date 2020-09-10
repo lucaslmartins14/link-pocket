@@ -9,5 +9,4 @@ class GetListUseCase(private val previewRepository: IPreviewRepository) {
     fun getPreview() : Observable<List<Preview>>{
         return previewRepository.getPreview()
     }
-
 }
