@@ -1,24 +1,33 @@
 package com.linkpocket.ui
 
-import android.view.View
-import com.bumptech.glide.Glide
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.domain.model.Preview
 import com.linkpocket.R
-import com.linkpocket.ext.ItemViewBuilder
-import kotlinx.android.synthetic.main.item_card_link.view.*
+import com.linkpocket.databinding.ItemCardLinkBinding
 
-class LinkKeeperAdapter : ItemViewBuilder<Preview>() {
+class LinkKeeperAdapter : RecyclerView.Adapter<LinkKeeperAdapter.LinkKeeperAdapterViewHolder>() {
 
-    override val layout: Int = R.layout.item_card_link
+    private val list = ArrayList<Preview>()
 
-    override fun View.onBind(position: Int) {
-        val item = collection.elementAt(position)
-        title.text = item.name
-        description.text = item.description
+    fun addList(list : List<Preview>) {
+        this.list.clear()
+        this.list.addAll(list)
+    }
 
-        Glide.with(this)
-            .load(item.image)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(photo)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LinkKeeperAdapterViewHolder =
+        LinkKeeperAdapterViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_card_link, parent,false))
+
+    override fun onBindViewHolder(holder: LinkKeeperAdapterViewHolder, position: Int) = holder.bind(list[position])
+
+    override fun getItemCount(): Int = list.size
+
+    class LinkKeeperAdapterViewHolder(private val dataBinding: ItemCardLinkBinding) : RecyclerView.ViewHolder(dataBinding.root) {
+
+        fun bind(preview: Preview) {
+            dataBinding.preview = preview
+        }
     }
 }
