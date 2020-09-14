@@ -1,20 +1,23 @@
 package com.linkpocket.ui
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.domain.GetListUseCase
 import com.domain.model.Preview
 import io.reactivex.Observer
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
 
-    private val mainViewStateMutableLiveData = MutableLiveData<MainUiState>()
-    val mainViewStateLiveData: LiveData<MainUiState> = mainViewStateMutableLiveData
+    private val mainViewStateMutableLiveData = MutableLiveData<List<Preview>>()
+    val mainViewStateLiveData: LiveData<List<Preview>> = mainViewStateMutableLiveData
+    val name: ObservableField<String> = ObservableField("hamburguer")
+
+    val uiState: ObservableField<MainUiState> = ObservableField()
 
     init {
         initList()
@@ -30,23 +33,16 @@ class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
                 }
 
                 override fun onSubscribe(d: Disposable) {
-                    // Inscrever para receber a lista
-
-                    // Iniciar Loading
-                    mainViewStateMutableLiveData.postValue(MainUiState.Loading)
+                    uiState.set(MainUiState.Loading)
                 }
 
                 override fun onNext(previewList: List<Preview>) {
-                    // Enviar a lista
-
-                    // Retorno da Lista
-                    mainViewStateMutableLiveData.postValue(MainUiState.Success(previewList))
+                    uiState.set(MainUiState.Success)
+                    mainViewStateMutableLiveData.postValue(previewList)
                 }
 
                 override fun onError(e: Throwable) {
-                    // Tratar os erros vindos de qualquer package
-
-                    mainViewStateMutableLiveData.postValue(MainUiState.Error)
+                    uiState.set(MainUiState.Error)
                 }
             })
     }

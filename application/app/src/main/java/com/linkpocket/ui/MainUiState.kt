@@ -1,9 +1,7 @@
 package com.linkpocket.ui
 
-import com.domain.model.Preview
-
 sealed class MainUiState {
-    class Success(val list: List<Preview>) : MainUiState()
+    object Success : MainUiState()
     object Loading : MainUiState()
     object Error : MainUiState()
 }

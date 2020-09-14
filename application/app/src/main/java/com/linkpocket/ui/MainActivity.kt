@@ -1,26 +1,29 @@
 package com.linkpocket.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.linkpocket.R
+import com.linkpocket.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by inject()
+    private val viewModelMainActivity: MainViewModel by viewModel()
     private val linkKeeperAdapter = LinkKeeperAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val databindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        databindingUtil.viewModel = viewModelMainActivity
+
         setupListPreview()
 
-        viewModel.mainViewStateLiveData.observe(this, Observer {
-            handlerState(it)
+        viewModelMainActivity.mainViewStateLiveData.observe(this, Observer {
+            linkKeeperAdapter.addList(it)
         })
     }
 
@@ -29,31 +32,5 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
             adapter = linkKeeperAdapter
         }
-    }
-
-    private fun handlerState(state: MainUiState) {
-        when (state) {
-            is MainUiState.Loading -> showLoading()
-            is MainUiState.Success -> {
-                hideLoading()
-                linkKeeperAdapter.addList(state.list)
-            }
-            is MainUiState.Error -> {
-                hideLoading()
-                showError()
-            }
-        }
-    }
-
-    private fun showLoading() {
-        loading.visibility = View.VISIBLE
-    }
-
-    private fun hideLoading() {
-        loading.visibility = View.GONE
-    }
-
-    private fun showError() {
-        state_error.visibility = View.VISIBLE
     }
 }
