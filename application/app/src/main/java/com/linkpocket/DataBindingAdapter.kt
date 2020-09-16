@@ -14,7 +14,7 @@ object DataBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("bind:textDescription")
+    @BindingAdapter("bind:imageURL")
     fun bindImageURL(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
             .load(url)

@@ -15,7 +15,7 @@ class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
 
     private val mainViewStateMutableLiveData = MutableLiveData<List<Preview>>()
     val mainViewStateLiveData: LiveData<List<Preview>> = mainViewStateMutableLiveData
-    val name: ObservableField<String> = ObservableField("hamburguer")
+
 
     val uiState: ObservableField<MainUiState> = ObservableField()
 
@@ -46,5 +46,4 @@ class MainViewModel(private val getListUseCase: GetListUseCase) : ViewModel() {
                 }
             })
     }
-
 }

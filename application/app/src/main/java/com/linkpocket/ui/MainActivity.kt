@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.linkpocket.R
 import com.linkpocket.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,8 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val databindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        databindingUtil.viewModel = viewModelMainActivity
+        val dataBindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        dataBindingUtil.viewModel = viewModelMainActivity
 
         setupListPreview()
 
@@ -28,9 +27,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListPreview() {
-        recycler_cards_links.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            adapter = linkKeeperAdapter
-        }
+        recycler_cards_links.adapter = linkKeeperAdapter
     }
 }

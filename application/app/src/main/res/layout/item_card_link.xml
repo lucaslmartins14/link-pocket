@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="preview"
             type="com.domain.model.Preview" />
@@ -16,13 +17,13 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@android:color/holo_orange_light"
-            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@android:color/holo_blue_bright"
+            app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,46 +33,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:imageURL="@{preview.image}"
+                    tools:src="@tools:sample/avatars" />
+
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@{preview.name}"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/photo"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/description"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="@tools:sample/lorem" />
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="4dp"
-                    bind:textDescription="@{preview.description}"
+                    android:layout_marginBottom="32dp"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/photo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title"
-                    tools:text="@tools:sample/lorem" />
-
-                <ImageView
-                    android:id="@+id/photo"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    bind:textDescription="@{preview.image}"
-                    tools:src="@tools:sample/avatars" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    bind:textDescription="@{preview.description}"
+                    tools:text="@tools:sample/lorem" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
