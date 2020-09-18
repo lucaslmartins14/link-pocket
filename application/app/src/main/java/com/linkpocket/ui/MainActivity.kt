@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.linkpocket.R
 import com.linkpocket.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import com.linkpocket.ui.links.adapter.LinkKeeperAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +27,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListPreview() {
-        recycler_cards_links.adapter = linkKeeperAdapter
+//        recycler_cards_links.adapter = linkKeeperAdapter
     }
 }

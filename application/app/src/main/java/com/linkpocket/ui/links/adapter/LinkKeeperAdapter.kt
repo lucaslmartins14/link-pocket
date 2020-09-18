@@ -1,4 +1,4 @@
-package com.linkpocket.ui
+package com.linkpocket.ui.links.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

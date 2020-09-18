@@ -26,23 +26,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Hey, Good Morning"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toStartOf="@id/button_notification"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Hey, Good Morning" />
 
-        <com.google.android.material.button.MaterialButton
+        <include
             android:id="@+id/button_notification"
-            style="@style/Button.IconOnly.Circle"
+            layout="@layout/include_content_button_notifiation"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:alpha="0.6"
-            app:backgroundTint="@android:color/darker_gray"
-            app:cornerRadius="20dp"
-            app:icon="@drawable/ic_outline_notifications_24"
-            app:iconTint="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/greeting_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/greeting_user" />
@@ -54,71 +48,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="The Best places to travel on Earth"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@id/button_notification"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/greeting_user" />
+            app:layout_constraintTop_toBottomOf="@id/greeting_user"
+            android:text="The Best places to travel on Earth" />
 
-        <com.google.android.material.tabs.TabLayout
+        <include
             android:id="@+id/tab_layout"
+            layout="@layout/include_content_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_screen"
-            app:tabIndicatorColor="@android:color/black"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@android:color/black"
-            app:tabTextAppearance="@style/TabText"
-            app:tabTextColor="@android:color/darker_gray">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/tab_item" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/tab_item" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/tab_item" />
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_cards_links"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="0dp"
-            android:paddingBottom="16dp"
+            android:layout_marginTop="24dp"
             android:visibility="@{viewModel.uiState instanceof MainUiState.Success ? View.VISIBLE : View.GONE}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/bottomnavigation"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout"
-            tools:listitem="@layout/item_card_link"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@id/title_screen" />
 
         <ProgressBar
             android:id="@+id/loading"
@@ -131,8 +76,9 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
             android:id="@+id/state_error"
+            layout="@layout/include_content_error_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="@{viewModel.uiState instanceof MainUiState.Error ? View.VISIBLE : View.GONE}"
@@ -140,32 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
-
-            <ImageView
-                android:id="@+id/image_state_error"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/ic_error_outline"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Infelizmente aconteceu algum erro, tente novamente"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_state_error" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:visibility="gone" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
